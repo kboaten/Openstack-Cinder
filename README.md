@@ -51,9 +51,8 @@ sudo cp /etc/kubernetes/manifests/kube-controller-manager.manifest /etc/kubernet
 sudo vim /etc/kubernetes/manifests/kube-controller-manager.yaml
 
 #Add this under spec/containers/command
-- --cloud-provider=openstack
-- --cloud-config=/etc/kubernetes/cloud.conf
-
+ 
+```yaml
 [...] 
 spec:
   containers:
@@ -73,8 +72,8 @@ spec:
       type: FileOrCreate
     name: cloud-config
 [...]
-
-#Verify that system picked up changes
+```
+### Verify that system picked up changes
 kubectl describe pod kube-controller-manager -n kube-system | grep '/etc/kubernetes/cloud.conf'
 
 
@@ -82,7 +81,7 @@ kubectl describe pod kube-controller-manager -n kube-system | grep '/etc/kuberne
 # Create a default Storage Class
  
 vi cinder-storage.yaml 
-
+```yaml 
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -97,6 +96,6 @@ parameters:
   type: iscsi
   availability: nova
 allowVolumeExpansion: true
-
+``` 
 
 kubectl create -f cinder-storage.yaml
