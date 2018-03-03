@@ -21,7 +21,7 @@ subnet-id=<openstack subnet id>
 floating-network-id=<public network id>
 
 
-Configuring Kubelet
+# Configuring Kubelet
 This step is needed for all nodes, including the master.
 
 #Run this on host to copy config to all nodes including master
@@ -45,7 +45,7 @@ sudo systemctl restart kubelet
  
 -------------------------------
 
-Configuring Master Nodes
+# Configuring Master Nodes
 
 sudo cp /etc/kubernetes/manifests/kube-controller-manager.manifest /etc/kubernetes/manifests/kube-controller-manager.yaml
 sudo vim /etc/kubernetes/manifests/kube-controller-manager.yaml
@@ -76,3 +76,27 @@ spec:
 
 #Verify that system picked up changes
 kubectl describe pod kube-controller-manager -n kube-system | grep '/etc/kubernetes/cloud.conf'
+
+
+
+# Create a default Storage Class
+ 
+vi cinder-storage.yaml 
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: standard
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: EnsureExists
+provisioner: kubernetes.io/cinder
+parameters:
+  type: iscsi
+  availability: nova
+allowVolumeExpansion: true
+
+
+kubectl create -f cinder-storage.yaml
