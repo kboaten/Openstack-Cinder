@@ -16,7 +16,7 @@ auth-url=http://<host>:5000/v3
 username=<username>
 password=<pwd>
 region=RegionOne
-tenant-name=kubernetes
+tenant-name=<openstack tenant>
 domain-name=Default
 
 [LoadBalancer]
