@@ -1,6 +1,9 @@
 # Openstack-Cinder - Enabling Cinder on Kubernetes Cluster
 
 Highly based on this: 
+
+https://stackoverflow.com/questions/46067591/how-to-use-openstack-cinder-to-create-storage-class-and-dynamically-provision-pe
+
 https://medium.com/@arthur.souzamiranda/kubernetes-with-openstack-cloud-provider-current-state-and-upcoming-changes-part-1-of-2-48b161ea449a
 
 Note: This was tested on Kubernetes 1.9 and Openstack Pike
