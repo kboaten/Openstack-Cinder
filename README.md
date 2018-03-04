@@ -10,7 +10,7 @@ Note: This was tested on Kubernetes 1.9 and Openstack Pike
 
 #create a file on the host
 vim /etc/kubernetes/cloud.conf 
-
+```properties
 [Global]
 auth-url=http://<host>:5000/v3
 username=<username>
@@ -22,7 +22,7 @@ domain-name=Default
 [LoadBalancer]
 subnet-id=<openstack subnet id>
 floating-network-id=<public network id>
-
+```
 
 # Configuring Kubelet
 This step is needed for all nodes, including the master.
